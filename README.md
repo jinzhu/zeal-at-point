@@ -15,7 +15,7 @@ The recommended way to install is via [MELPA](http://melpa.milkbox.net/) or Marm
 (global-set-key "\C-cd" 'zeal-at-point)
 ```
 
-Run `zeal-at-point` to search the word at point, then Zeal is launched and search the word.
+Run `zeal-at-point` to search the word at point (or string in region), then Zeal is launched and search the word.
 Use prefix argument `C-u` to edit the search string first.
 
 Zeal queries can be narrowed down with a docset prefix. You can customize the relations between docsets and major modes.

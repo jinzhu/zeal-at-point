@@ -3,7 +3,7 @@
 ;; Copyright (C) 2013 Jinzhu
 ;; Author:  Jinzhu <wosmvp@gmail.com>
 ;; Created: 29 Nov 2013
-;; Version: 0.0.1
+;; Version: 0.0.2
 ;; URL: https://github.com/jinzhu/zeal-at-point
 ;;
 ;; This file is NOT part of GNU Emacs.
@@ -145,7 +145,7 @@ the combined docset.")
 (defun zeal-at-point (&optional edit-search)
   "Search for the word at point in Zeal"
   (interactive "P")
-  (let* ((thing (thing-at-point 'symbol))
+  (let* ((thing (if mark-active (buffer-substring (region-beginning) (region-end)) (thing-at-point 'symbol)))
          (search (zeal-at-point-maybe-add-docset thing)))
     (zeal-at-point-run-search
      (if (or edit-search (null thing))
