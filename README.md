@@ -4,6 +4,10 @@ Search the word at point with Zeal
 
 [Zeal](http://zealdocs.org/) is a simple offline API documentation browser inspired by Dash (OS X app), available for Linux and Windows.
 
+## Installation
+
+The recommended way to install is via [MELPA](http://melpa.milkbox.net/) or Marmalade
+
 ## Usage
 
 ```lisp
