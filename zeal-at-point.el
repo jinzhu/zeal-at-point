@@ -142,6 +142,7 @@ the combined docset.")
     (message "Zeal haven't been found, install it first http://zealdocs.org"))
   )
 
+;;;###autoload
 (defun zeal-at-point (&optional edit-search)
   "Search for the word at point in Zeal"
   (interactive "P")
@@ -152,6 +153,7 @@ the combined docset.")
          (read-string "Zeal search: " search)
        search))))
 
+;;;###autoload
 (defun zeal-at-point-set-docset ()
   "Set current buffer's docset."
   (interactive)
