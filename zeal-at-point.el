@@ -57,6 +57,10 @@
 
 ;;; Code:
 
+(defgroup zeal-at-point nil
+  "Searching in Zeal for text at point"
+  :group 'external)
+
 (defcustom zeal-at-point-mode-alist
   '((actionscript-mode . "actionscript")
     (arduino-mode . "arduino")
