@@ -57,7 +57,6 @@
 
 ;;; Code:
 
-;;;###autoload
 (defcustom zeal-at-point-mode-alist
   '((actionscript-mode . "actionscript")
     (arduino-mode . "arduino")
@@ -100,7 +99,6 @@ for one or more docsets in Zeal."
                        (string :tag "Docset tag")))
   :group 'zeal-at-point)
 
-;;;###autoload
 (defvar zeal-at-point-docsets (mapcar
                                (lambda (element)
                                  (cdr element))
@@ -111,7 +109,6 @@ is a collection of all the values from `zeal-at-point-mode-alist'.
 Setting or appending this variable can be used to add completion
 options to `zeal-at-point-with-docset'.")
 
-;;;###autoload
 (defvar zeal-at-point-docset nil
   "Variable used to specify the docset for the current buffer.
 Users can set this to override the default guess made using
