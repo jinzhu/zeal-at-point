@@ -30,7 +30,10 @@ Additionally, the buffer-local variable `zeal-at-point-docset` can be set in a s
    (lambda () (setq zeal-at-point-docset "rails")))
 ```
 
-Thanks [dash-at-point.el](https://github.com/stanaka/dash-at-point), I copied lots of codes from it!
+## Thanks
+
+* [Shinji Tanaka](https://github.com/stanaka), Creater of [dash-at-point.el](https://github.com/stanaka/dash-at-point), I copied lots of codes from it!
+* [Syohei YOSHIDA](https://github.com/syohex), Contributed lots of pull requests
 
 ## Copyright
 
