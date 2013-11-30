@@ -126,6 +126,8 @@ which sets this variable to \"allruby\" so that Zeal will search
 the combined docset.")
 (make-variable-buffer-local 'zeal-at-point-docset)
 
+(defvar zeal-at-point--docset-hitory nil)
+
 (unless (fboundp 'setq-local)
   (defmacro setq-local (var val)
     `(set (make-local-variable ',var) ,val)))
@@ -158,11 +160,23 @@ the combined docset.")
          (read-string "Zeal search: " search)
        search))))
 
+(defun zeal-at-point--docset-candidates ()
+  (mapcar 'cdr zeal-at-point-mode-alist))
+
+(defun zeal-at-point--set-docset-prompt ()
+  (let ((default-docset (zeal-at-point-get-docset)))
+    (format "Zeal docset%s: " (if default-docset
+                                  (format "[Default: %s]" default-docset)
+                                ""))))
+
 ;;;###autoload
 (defun zeal-at-point-set-docset ()
   "Set current buffer's docset."
   (interactive)
-  (setq-local zeal-at-point-docset (read-string "Zeal docset: " (zeal-at-point-get-docset)))
+  (setq-local zeal-at-point-docset
+              (completing-read (zeal-at-point--set-docset-prompt)
+                               (zeal-at-point--docset-candidates) nil nil nil
+                               'zeal-at-point--docset-hitory (zeal-at-point-get-docset)))
   )
 
 (provide 'zeal-at-point)
