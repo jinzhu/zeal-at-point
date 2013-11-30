@@ -11,7 +11,6 @@ The recommended way to install is via [MELPA](http://melpa.milkbox.net/) or Marm
 ## Usage
 
 ```lisp
-(require 'zeal-at-point)
 (global-set-key "\C-cd" 'zeal-at-point)
 ```
 

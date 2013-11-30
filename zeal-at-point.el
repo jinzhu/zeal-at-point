@@ -3,7 +3,7 @@
 ;; Copyright (C) 2013 Jinzhu
 ;; Author:  Jinzhu <wosmvp@gmail.com>
 ;; Created: 29 Nov 2013
-;; Version: 0.0.2
+;; Version: 0.0.3
 ;; URL: https://github.com/jinzhu/zeal-at-point
 ;;
 ;; This file is NOT part of GNU Emacs.
