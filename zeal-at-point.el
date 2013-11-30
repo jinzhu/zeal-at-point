@@ -126,6 +126,10 @@ which sets this variable to \"allruby\" so that Zeal will search
 the combined docset.")
 (make-variable-buffer-local 'zeal-at-point-docset)
 
+(unless (fboundp 'setq-local)
+  (defmacro setq-local (var val)
+    `(set (make-local-variable ',var) ,val)))
+
 (defun zeal-at-point-get-docset ()
   "Guess which docset suit to the current major mode."
   (or zeal-at-point-docset (cdr (assoc major-mode zeal-at-point-mode-alist))))
