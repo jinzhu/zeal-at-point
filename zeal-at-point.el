@@ -146,7 +146,7 @@ the combined docset.")
 (defun zeal-at-point-run-search (search)
   (if (executable-find "zeal")
       (start-process "Zeal" nil "zeal" "--query" search)
-    (message "Zeal haven't been found, install it first http://zealdocs.org"))
+    (message "Zeal wasn't found, install it first http://zealdocs.org"))
   )
 
 ;;;###autoload
