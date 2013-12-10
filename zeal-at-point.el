@@ -73,6 +73,7 @@
     (css-mode . "css")
     (elixir-mode . "elixir")
     (emacs-lisp-mode . "emacs")
+    (enh-ruby-mode . "ruby")
     (erlang-mode . "erlang")
     (gfm-mode . "markdown")
     (go-mode . "go")
@@ -94,6 +95,7 @@
     (ruby-mode . "ruby")
     (sass-mode . "sass")
     (scala-mode . "scala")
+    (tcl-mode . "tcl")
     (vim-mode . "vim"))
   "Alist which maps major modes to Zeal docset tags.
 Each entry is of the form (MAJOR-MODE . DOCSET-TAG) where
