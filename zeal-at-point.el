@@ -64,7 +64,7 @@
 (defcustom zeal-at-point-mode-alist
   '((actionscript-mode . "actionscript")
     (arduino-mode . "arduino")
-    (c++-mode . "cpp")
+    (c++-mode . "c++")
     (c-mode . "c")
     (clojure-mode . "clojure")
     (coffee-mode . "coffee")
