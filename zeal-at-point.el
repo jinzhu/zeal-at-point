@@ -72,7 +72,7 @@
     (cperl-mode . "perl")
     (css-mode . "css")
     (elixir-mode . "elixir")
-    (emacs-lisp-mode . "emacs")
+    (emacs-lisp-mode . "emacs lisp")
     (enh-ruby-mode . "ruby")
     (erlang-mode . "erlang")
     (gfm-mode . "markdown")
