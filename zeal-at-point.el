@@ -181,6 +181,14 @@ the combined docset.")
                                'zeal-at-point--docset-history (zeal-at-point-get-docset)))
   )
 
+;;;###autoload
+(defun zeal-at-point-search (&optional edit-search)
+  "Prompt and search in zeal"
+  (interactive "P")
+  (let ((search (zeal-at-point-maybe-add-docset "")))
+    (zeal-at-point-run-search
+     (read-string "Zeal search: " search))))
+
 (provide 'zeal-at-point)
 
 ;;; zeal-at-point.el ends here
