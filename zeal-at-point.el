@@ -175,10 +175,13 @@ the combined docset.")
 (defun zeal-at-point-set-docset ()
   "Set current buffer's docset."
   (interactive)
-  (setq-local zeal-at-point-docset
-              (completing-read (zeal-at-point--set-docset-prompt)
-                               (zeal-at-point--docset-candidates) nil nil nil
-                               'zeal-at-point--docset-hitory (zeal-at-point-get-docset)))
+  (let ((minibuffer-local-completion-map
+         (copy-keymap minibuffer-local-completion-map)))
+    (define-key minibuffer-local-completion-map (kbd "SPC") nil)
+    (setq-local zeal-at-point-docset
+                (completing-read (zeal-at-point--set-docset-prompt)
+                                 (zeal-at-point--docset-candidates) nil nil nil
+                                 'zeal-at-point--docset-hitory (zeal-at-point-get-docset))))
   )
 
 (provide 'zeal-at-point)
