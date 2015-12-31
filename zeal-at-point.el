@@ -130,6 +130,15 @@ the combined docset.")
 
 (defvar zeal-at-point--docset-hitory nil)
 
+(defvar zeal-at-point-zeal-version
+  (when (executable-find "zeal")
+    (let ((output (with-temp-buffer
+                    (call-process "zeal" nil t nil "--version")
+                    (buffer-string))))
+      (when (string-match "Zeal \\([[:digit:]\\.]+\\)" output)
+        (match-string 1 output))))
+  "The version of zeal installed on the system.")
+
 (unless (fboundp 'setq-local)
   (defmacro setq-local (var val)
     `(set (make-local-variable ',var) ,val)))
@@ -147,9 +156,10 @@ the combined docset.")
 
 (defun zeal-at-point-run-search (search)
   (if (executable-find "zeal")
-      (start-process "Zeal" nil "zeal" "--query" search)
-    (message "Zeal wasn't found, install it first http://zealdocs.org"))
-  )
+      (if (version< "0.2.0" zeal-at-point-zeal-version)
+          (start-process "Zeal" nil "zeal" search)
+        (start-process "Zeal" nil "zeal" "--query" search))
+    (message "Zeal wasn't found, install it first http://zealdocs.org")))
 
 ;;;###autoload
 (defun zeal-at-point (&optional edit-search)
