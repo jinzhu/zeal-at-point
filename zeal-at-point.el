@@ -93,6 +93,7 @@
     (puppet-mode . "puppet")
     (python-mode . "python 3")
     (ruby-mode . "ruby")
+    (rust-mode . "rust")
     (sass-mode . "sass")
     (scala-mode . "scala")
     (tcl-mode . "tcl")
