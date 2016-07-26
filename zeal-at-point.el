@@ -68,7 +68,7 @@
     (c-mode . "c")
     (clojure-mode . "clojure")
     (coffee-mode . "coffee")
-    (common-lisp-mode . "lisp")
+    (lisp-mode . "lisp")
     (cperl-mode . "perl")
     (css-mode . "css")
     (elixir-mode . "elixir")
