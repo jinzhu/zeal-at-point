@@ -153,7 +153,8 @@ the combined docset.")
                (buffer-string))))
         (when (string-match "Zeal \\([[:digit:]\\.]+\\)" output)
           (setq zeal-at-point-zeal-version
-                (match-string 1 output))))))
+                (match-string 1 output)))
+        zeal-at-point-zeal-version)))
 
 (defun zeal-at-point-get-docset ()
   "Guess which docset suit to the current major mode."
