@@ -103,7 +103,8 @@ Each entry is of the form (MAJOR-MODE . DOCSET-TAG) where
 MAJOR-MODE is a symbol and DOCSET-TAG is a corresponding tag
 for one or more docsets in Zeal."
   :type '(repeat (cons (symbol :tag "Major mode name")
-                       (string :tag "Docset tag")))
+                       (or (string :tag "Docset tag")
+                           (repeat (string :tag "Docset tags")))))
   :group 'zeal-at-point)
 
 (defvar zeal-at-point-docsets (mapcar
@@ -151,9 +152,14 @@ the combined docset.")
 (defun zeal-at-point-maybe-add-docset (search-string)
   "Prefix SEARCH-STRING with the guessed docset, if any."
   (let ((docset (zeal-at-point-get-docset)))
-    (concat (when docset
-              (concat docset ":"))
-            search-string)))
+    (if (version<= "0.2.1" zeal-at-point-zeal-version)
+        (let ((docsets (if (listp docset)
+                           (mapconcat #'identity docset ",")
+                         docset)))
+          (format "dash-plugin://keys=%s&query=%s" docsets search-string))
+      (concat (when docset
+                (concat docset ":"))
+              search-string))))
 
 (defun zeal-at-point-run-search (search)
   (if (executable-find "zeal")
@@ -182,6 +188,14 @@ the combined docset.")
                                   (format "[Default: %s]" default-docset)
                                 ""))))
 
+(defun zeal-at-point-read-docset ()
+  (let ((docset (completing-read (zeal-at-point--set-docset-prompt)
+                                 (zeal-at-point--docset-candidates) nil nil nil
+                                 'zeal-at-point--docset-history (zeal-at-point-get-docset))))
+    (if (string-match-p "," docset)
+        (split-string docset ",")
+      docset)))
+
 ;;;###autoload
 (defun zeal-at-point-set-docset ()
   "Set current buffer's docset."
@@ -189,11 +203,7 @@ the combined docset.")
   (let ((minibuffer-local-completion-map
          (copy-keymap minibuffer-local-completion-map)))
     (define-key minibuffer-local-completion-map (kbd "SPC") nil)
-    (setq-local zeal-at-point-docset
-                (completing-read (zeal-at-point--set-docset-prompt)
-                                 (zeal-at-point--docset-candidates) nil nil nil
-                                 'zeal-at-point--docset-history (zeal-at-point-get-docset))))
-  )
+    (setq-local zeal-at-point-docset (zeal-at-point-read-docset))))
 
 ;;;###autoload
 (defun zeal-at-point-search (&optional edit-search)

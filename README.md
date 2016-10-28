@@ -24,6 +24,9 @@ Zeal queries can be narrowed down with a docset prefix. You can customize the re
 
 ```lisp
 (add-to-list 'zeal-at-point-mode-alist '(perl-mode . "perl"))
+
+;; Use multiple docsets
+(add-to-list 'zeal-at-point-mode-alist '(python-mode . ("python" "django")))
 ```
 
 Additionally, the buffer-local variable `zeal-at-point-docset` can be set in a specific mode hook (or file/directory local variables) to programmatically override the guessed docset. For example:
@@ -31,6 +34,10 @@ Additionally, the buffer-local variable `zeal-at-point-docset` can be set in a s
 ```lisp
 (add-hook 'rinari-minor-mode-hook
    (lambda () (setq zeal-at-point-docset "rails")))
+
+;; Use multiple docsets
+(add-hook 'python-mode-hook
+   (lambda () (setq zeal-at-point-docset '("python" "django"))))
 ```
 
 You are also possible to set docset for current buffer with `zeal-at-point-set-docset`
