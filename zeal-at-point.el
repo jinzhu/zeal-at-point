@@ -127,7 +127,7 @@ for one or more docsets in Zeal."
 is a collection of all the values from `zeal-at-point-mode-alist'.
 
 Setting or appending this variable can be used to add completion
-options to `zeal-at-point-with-docset'.")
+options to `zeal-at-point-docset'.")
 
 (defvar zeal-at-point-docset nil
   "Variable used to specify the docset for the current buffer.
@@ -169,11 +169,11 @@ the combined docset.")
       (if (version< "0.2.0" zeal-at-point-zeal-version)
           (start-process "Zeal" nil "zeal" search)
         (start-process "Zeal" nil "zeal" "--query" search))
-    (message "Zeal wasn't found, install it first http://zealdocs.org")))
+    (message "Zeal is not found. Please install it from http://zealdocs.org")))
 
 ;;;###autoload
 (defun zeal-at-point (&optional edit-search)
-  "Search for the word at point in Zeal"
+  "Search for the word at point in Zeal."
   (interactive "P")
   (let* ((thing (if mark-active (buffer-substring (region-beginning) (region-end)) (thing-at-point 'symbol)))
          (search (zeal-at-point-maybe-add-docset thing)))
@@ -210,7 +210,7 @@ the combined docset.")
 
 ;;;###autoload
 (defun zeal-at-point-search (&optional edit-search)
-  "Prompt and search in zeal"
+  "Prompt and search in zeal."
   (interactive "P")
   (let ((search (zeal-at-point-maybe-add-docset "")))
     (zeal-at-point-run-search
