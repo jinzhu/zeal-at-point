@@ -59,7 +59,14 @@
 
 (defgroup zeal-at-point nil
   "Searching in Zeal for text at point"
-  :group 'external)
+  :group 'external
+  :prefix "zeal-at-point-")
+
+(defcustom zeal-at-point-exe
+  (executable-find "zeal")
+  "Location of zeal executable."
+  :group 'zeal-at-point
+  :type 'string)
 
 (defvar zeal-at-point-zeal-version
   (when (executable-find "zeal")
@@ -148,6 +155,21 @@ the combined docset.")
   (defmacro setq-local (var val)
     `(set (make-local-variable ',var) ,val)))
 
+(defvar zeal-at-point-zeal-version nil
+  "The version of zeal installed on the system.")
+
+(defun zeal-at-point-get-version ()
+  "Find installed zeal version."
+  (or zeal-at-point-zeal-version
+      (let ((output
+             (with-temp-buffer
+               (call-process zeal-at-point-exe nil t nil "--version")
+               (buffer-string))))
+        (when (string-match "Zeal \\([[:digit:]\\.]+\\)" output)
+          (setq zeal-at-point-zeal-version
+                (match-string 1 output)))
+        zeal-at-point-zeal-version)))
+
 (defun zeal-at-point-get-docset ()
   "Guess which docset suit to the current major mode."
   (or zeal-at-point-docset (cdr (assoc major-mode zeal-at-point-mode-alist))))
@@ -165,10 +187,10 @@ the combined docset.")
               search-string))))
 
 (defun zeal-at-point-run-search (search)
-  (if (executable-find "zeal")
-      (if (version< "0.2.0" zeal-at-point-zeal-version)
-          (start-process "Zeal" nil "zeal" search)
-        (start-process "Zeal" nil "zeal" "--query" search))
+  (if zeal-at-point-exe
+      (if (version< "0.2.0" (zeal-at-point-get-version))
+          (start-process "Zeal" nil zeal-at-point-exe search)
+        (start-process "Zeal" nil zeal-at-point-exe "--query" search))
     (message "Zeal wasn't found, install it first http://zealdocs.org")))
 
 ;;;###autoload
